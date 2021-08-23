@@ -15,32 +15,29 @@ public class LinkedListDeque<Misc> {
     }
 
     private Node sentinel;
-    private Node head;
-    private Node tail;
     private int size;
 
     // LinkedListDeque constructor for an empty list
     public LinkedListDeque() {
-//        Node start = new Node();
-        // initialize the sentinel, review this later
-        //sentinel = new Node(sentinel.next, null, sentinel.prev); first try, can't do this because the sentinel hasn't been initialized yet
         sentinel = new Node(null, null, null);
-        head = sentinel;
-        tail = sentinel;
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
     // addFirst, no looping or recursion, increment size
     public void addFirst(Misc i) {
-        // head = new Node(sentinel.prev, i, sentinel.next); // where does next point too?
-        sentinel.next = new Node(head, i, tail); // this is gonna get messy i think
-        // what about sentinel.prev?
+        Node currFirst = sentinel.next;
+        sentinel.next = new Node(sentinel, i, currFirst);
+        currFirst.prev = sentinel.next;
         size += 1;
     }
 
     // addLast, no looping or recursion, increment size
     public void addLast(Misc i) {
-
+        Node currLast = sentinel.prev;
+        sentinel.prev = new Node(currLast, i, sentinel);
+        currLast.next = sentinel.prev;
         size += 1;
     }
 
@@ -66,15 +63,52 @@ public class LinkedListDeque<Misc> {
             return null;
         }
         Node firstNode = sentinel.next;
-        sentinel.next = sentinel.next.next; // this might not work as intended
-        return firstNode;
+        sentinel.next = sentinel.next.next;
+        // need to update the prev pointer of the node after the first node
+        sentinel.next.prev = sentinel;
+
+        size -= 1;
+        return firstNode; // how do i return the value?
     }
 
     // removeLast, remove and return last item, if none then return null
+    public Node removeLast() {
+        if (sentinel.prev == null) {
+            return null;
+        }
+        Node lastNode = sentinel.prev;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
+        size -= 1;
+
+        return lastNode; // review with hunter
+    }
 
     // get(int index), get item at given index where 0 == front item
+    public Misc get(int index){
+        Node curr = sentinel.next;
+        int counter = 0;
+        Misc found = null;
+        while (curr != null) {
+            if (counter == index) {
+                found = curr.item;
+                break;
+            }
+            curr = curr.next;
+            counter += 1;
+        }
+        return found;
+    }
 
     // getRecursive(int index)
+//    public Misc getRecursive(int index) { // review with Hunter
+//        Node curr = sentinel.next;
+//        if (index == 0) {
+//            return curr.item;
+//        }
+//
+//        return ;
+//    }
 
     // LinkedListDeque(LinkedListDeque other) create a copy of other
 
