@@ -2,6 +2,9 @@ package deque;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
+
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
@@ -12,6 +15,7 @@ public class LinkedListDequeTest {
      *
      * && is the "and" operation. */
     public void addIsEmptySizeTest() {
+
 
         System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
@@ -32,7 +36,7 @@ public class LinkedListDequeTest {
 		assertEquals(3, lld1.size());
 
 		System.out.println("Printing out deque: ");
-		lld1.printDeque();
+		//lld1.printDeque();
 
     }
 
@@ -61,13 +65,13 @@ public class LinkedListDequeTest {
     public void removeEmptyTest() {
 
         System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        /*
+
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         lld1.addFirst(3);
 
-        lld1.removeLast();
+        //lld1.removeLast();
         lld1.removeFirst();
-        lld1.removeLast();
+        //lld1.removeLast();
         lld1.removeFirst();
 
         int size = lld1.size();
@@ -76,14 +80,14 @@ public class LinkedListDequeTest {
         errorMsg += "  actual size() returned 0\n";
 
         assertEquals(errorMsg, 0, size);
-        */
+
     }
 
     @Test
     /* Check if you can create LinkedListDeques with different parameterized types*/
     public void multipleParamTest() {
 
-        /*
+
         LinkedListDeque<String>  lld1 = new LinkedListDeque<String>();
         LinkedListDeque<Double>  lld2 = new LinkedListDeque<Double>();
         LinkedListDeque<Boolean> lld3 = new LinkedListDeque<Boolean>();
@@ -92,10 +96,10 @@ public class LinkedListDequeTest {
         lld2.addFirst(3.14159);
         lld3.addFirst(true);
 
-        String s = lld1.removeFirst();
-        double d = lld2.removeFirst();
-        boolean b = lld3.removeFirst();
-        */
+//        String s = lld1.removeFirst();
+//        double d = lld2.removeFirst();
+//        boolean b = lld3.removeFirst();
+
     }
 
     @Test
@@ -136,3 +140,4 @@ public class LinkedListDequeTest {
         */
     }
 }
+
