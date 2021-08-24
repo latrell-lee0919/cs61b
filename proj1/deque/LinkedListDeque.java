@@ -56,32 +56,40 @@ public class LinkedListDeque<Misc> {
 
     // printDeque(), prints items from 1st to last separated by space
     // print out new line once all items have been printed
+    public void printDeque() {
+        Node curr = sentinel.next;
+        while (curr != sentinel) {
+            System.out.println(curr.item);
+            System.out.println(" ");
+            curr = curr.next;
+        }
+        System.out.println("All items printed");
+    }
 
     // removeFirst, remove and return 1st item, if none then return null
-    public Node removeFirst() {
-        if (sentinel.next == null) {
+    public Misc removeFirst() {
+        if (size == 0) {
             return null;
         }
-        Node firstNode = sentinel.next;
+        Misc first = sentinel.next.item;
         sentinel.next = sentinel.next.next;
-        // need to update the prev pointer of the node after the first node
         sentinel.next.prev = sentinel;
 
         size -= 1;
-        return firstNode; // how do i return the value?
+        return first;
     }
 
     // removeLast, remove and return last item, if none then return null
-    public Node removeLast() {
-        if (sentinel.prev == null) {
+    public Misc removeLast() {
+        if (size == 0) {
             return null;
         }
-        Node lastNode = sentinel.prev;
+        Misc last = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
         size -= 1;
 
-        return lastNode; // review with hunter
+        return last;
     }
 
     // get(int index), get item at given index where 0 == front item
@@ -107,10 +115,21 @@ public class LinkedListDeque<Misc> {
 //            return curr.item;
 //        }
 //
-//        return ;
+//        return curr.getRecursive(index - 1);
 //    }
 
     // LinkedListDeque(LinkedListDeque other) create a copy of other
+//    public LinkedListDeque(LinkedListDequeTest other) { // see video for solution
+//        sentinel = new Node(null, null, null);
+//        sentinel.prev = sentinel;
+//        sentinel.next = sentinel;
+//        size = 0;
+//        // loop through other
+//        for(int i = 0; i < other.size(); i += 1) {
+//            addLast((Misc) other.get(i));
+//        }
+//
+//    }
 
     public static void main(String[] args) {
         LinkedListDeque<Integer> dL = new LinkedListDeque<>();

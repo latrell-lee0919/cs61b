@@ -8,8 +8,9 @@ public class Main {
         dL.addFirst(3);
         dL.addLast(4);
         dL.addLast(5);
-        dL.removeFirst();
-        dL.removeLast();
-        System.out.println(dL.get(2));
+        dL.printDeque();
+//        System.out.println(dL.removeFirst()); // expect 3
+//        System.out.println(dL.removeLast()); // expect 5
+//        System.out.println(dL.get(2));
     }
 }
