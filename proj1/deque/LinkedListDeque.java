@@ -12,6 +12,7 @@ public class LinkedListDeque<Misc> {
             item = i;
             next = n;
         }
+
     }
 
     private Node sentinel;
@@ -109,26 +110,12 @@ public class LinkedListDeque<Misc> {
     }
 
     // getRecursive(int index)
-//    public Misc getRecursive(int index) { // review with Hunter
-//        Node curr = sentinel.next;
+//    public Misc getRecursive(int index, Node curr) { // review with Hunter
 //        if (index == 0) {
-//            return curr.item;
+//            return sentinel.next.item;
 //        }
 //
 //        return curr.getRecursive(index - 1);
-//    }
-
-    // LinkedListDeque(LinkedListDeque other) create a copy of other
-//    public LinkedListDeque(LinkedListDequeTest other) { // see video for solution
-//        sentinel = new Node(null, null, null);
-//        sentinel.prev = sentinel;
-//        sentinel.next = sentinel;
-//        size = 0;
-//        // loop through other
-//        for(int i = 0; i < other.size(); i += 1) {
-//            addLast((Misc) other.get(i));
-//        }
-//
 //    }
 
     public static void main(String[] args) {
