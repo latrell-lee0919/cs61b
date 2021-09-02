@@ -18,7 +18,15 @@ public class ArrayDeque<Misc> {
         capacity = items.length;
     }
 
-    // helper function, int minusOne(int index), compute array indices
+    // resize helper method
+    private void resize(int capacity) {
+        // create a new array with length of capacity
+        Misc[] a = (Misc[]) new Object[capacity];
+        // copy old array into the new array
+        System.arraycopy(items, 0, a, 0, size);
+        // point items to new array
+        items = a;
+    }
 
     // addFirst, add to beginning on the array
     public void addFirst(Misc i) {
@@ -41,6 +49,7 @@ public class ArrayDeque<Misc> {
     public void addLast(Misc i){
         if(size == capacity) {
             // resize the array
+            resize(size * 2);
         }
 
         items[last] = i;
@@ -67,6 +76,9 @@ public class ArrayDeque<Misc> {
         items[first] = null;
         first = first + 1;
         // if size is less than 25% of capacity, resize array
+        if(size < (capacity * .25)){
+            resize(size * 2);
+        }
         size -= 1;
         return temp;
     }
@@ -77,6 +89,9 @@ public class ArrayDeque<Misc> {
         items[last] = null;
         last = last - 1;
         // if size is less than 25% of capacity, resize array
+        if(size < (capacity * .25)) {
+            resize(size * 2);
+        }
         size -= 1;
         return temp;
     }
@@ -85,8 +100,6 @@ public class ArrayDeque<Misc> {
     public Misc get(int index) {
         return items[(index + first) % capacity]; // using mod is good for resetting back to the beginning
     }
-
-    // resize helper method
 
     // printDeque
     public void printDeque() {
