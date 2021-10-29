@@ -20,6 +20,7 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
     }
 
     public BSTMap() {
+        root = null;
     }
 
     @Override
@@ -34,7 +35,11 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
     @Override
     public boolean containsKey(Key key) {
         // can maybe just call the get method and return false if it's null
-        return false;
+        if(get(key) == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
@@ -47,11 +52,15 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
             // if it's not there, return null
             return null;
         }
+
+        if(x == null) {
+            return null;
+        }
         // start at the root
-        int comp = key.compareTo(root.key); // 0 means equal, less than 0 is less than, greater than 0 is greater than
+        int comp = key.compareTo(x.key); // 0 means equal, less than 0 is less than, greater than 0 is greater than
         // keep going until you reach the node with the key and return it
         if (comp == 0) {
-            return root.val;
+            return x.val;
         } else if (comp < 0) {
             // if key is less than the key in the root go left
             return get(x.left, key);
@@ -64,7 +73,19 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
 
     @Override
     public int size() {
-        return root.size;
+        if(root == null) {
+            return 0;
+        } else {
+            return root.size;
+        }
+    }
+
+    public int size(Node x) {
+        if(x == null) {
+            return 0;
+        } else {
+            return x.size;
+        }
     }
 
     @Override
@@ -80,8 +101,12 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
 
     private Node put(Node x, Key key, Value val) {
         if (x == null) {
-            return new Node(key, val, 1);
+            x = new Node(key, val, 1);
+            return x;
         }
+
+        x.size = 1 + size(x);
+
         int comp = key.compareTo(x.key);
         if (comp < 0) {
             x.left = put(x.left, key, val);
@@ -90,7 +115,6 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
         } else {
             x.val = val;
         }
-        x.size = 1 + x.left.size + x.right.size;
         return x;
     }
 
