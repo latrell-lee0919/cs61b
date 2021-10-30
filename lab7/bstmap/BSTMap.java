@@ -141,7 +141,31 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
 
     @Override
     public Value remove(Key key) {
-        throw new UnsupportedOperationException("Operation not supported");
+        Value val = get(key);
+        remove(root, key);
+        return val;
+    }
+
+    private Node remove(Node x, Key key) {
+        if (get(key) == null) {
+            return null;
+        }
+
+        int comp = key.compareTo(x.key);
+
+        if(comp < 0) {
+            // search left and remove
+            x.left = remove(x.left, key);
+            return x;
+
+        } else if (comp > 0) {
+            // search right and remove
+            x.right = remove(x.right, key);
+            return x;
+        } else {
+            // on the node with the key, remove it
+            return null;
+        }
     }
 
 
@@ -168,6 +192,9 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
         b.put("Binary", 2);
         b.put("Coding", 1);
         b.printInOrder();
+        System.out.println(b.remove("Coding"));
+        b.printInOrder();
+
     }
 }
 
