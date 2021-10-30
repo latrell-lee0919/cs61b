@@ -119,16 +119,34 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
     }
 
     public void printInOrder() {
-
+        String inOrder = printInOrder(root);
+        System.out.println(inOrder);
     }
 
-    @Override
-    public Set keySet() {
-        throw new UnsupportedOperationException("Operation not supported");
+    private String printInOrder(Node x) {
+        if(x == null) {
+            return "";
+        }
+        String output = "";
+
+        String left = printInOrder(x.left);
+
+        String right = printInOrder(x.right);
+
+        output = left + x.key.toString() + right;
+
+        // start at root
+        return output;
     }
 
     @Override
     public Value remove(Key key) {
+        throw new UnsupportedOperationException("Operation not supported");
+    }
+
+
+    @Override
+    public Set keySet() {
         throw new UnsupportedOperationException("Operation not supported");
     }
 
@@ -141,4 +159,16 @@ public class BSTMap <Key extends Comparable<Key>, Value> implements Map61B<Key, 
     public Iterator iterator() {
         throw new UnsupportedOperationException("Operation not supported");
     }
+
+    public static void main(String[] args) {
+        BSTMap<String, Integer> b = new BSTMap<>();
+        b.put("Latrell", 1);
+        b.put("Hunter", 1);
+        b.put("Tutoring", 1);
+        b.put("Binary", 2);
+        b.put("Coding", 1);
+        b.printInOrder();
+    }
 }
+
+
